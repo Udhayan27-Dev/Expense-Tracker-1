@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="../img/img.jpg" alt="Logo" class="logo">
+                <span class="brand-name">Expense Tracker</span>
+            </div>
+
+        </nav>
+
+        <div class="app-header">
+            <div class="balance-container"><br>
+                <h2>Current Balance</h2>
+                <div class="balance-amount" id="balance">₹0.00</div>
+            </div>
+        </div>
+
+        <div class="summary-container">
+            <div class="card income">
+                <h3>Income</h3>
+                <p id="income-total">₹0.00</p>
+                <i class="fas fa-long-arrow-alt-up"></i>
+            </div>
+            <div class="card expense">
+                <h3>Expenses</h3>
+                <p id="expense-total">₹0.00</p>
+                <i class="fas fa-long-arrow-alt-down"></i>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="expense-tab">Add Expense</button>
+                <button class="tab-btn" data-tab="income-tab">Add Income</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Expense Tab -->
+                <div class="tab-pane active" id="expense-tab">
+                    <div class="transaction-container">
+                        <h3>Add New Expense</h3>
+                        <form id="expense-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expense-category">Category</label>
+                                    <select id="expense-category" required>
+                                        <option value="" disabled selected>Select category</option>
+                                        <option value="Food">Food & Dining</option>
+                                        <option value="Transport">Transportation</option>
+                                        <option value="Shopping">Shopping</option>
+                                        <option value="Entertainment">Entertainment</option>
+                                        <option value="Utilities">Utilities</option>
+                                        <option value="Health">Healthcare</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="expense-amount">Amount</label>
+                                    <input type="number" id="expense-amount" placeholder="Enter amount..." step="0.01"
+                                        min="0" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expense-date">Date</label>
+                                    <input type="date" id="expense-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expense-note">Note (Optional)</label>
+                                    <input type="text" id="expense-note" placeholder="Add a note...">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn expense-btn">Add Expense <i
+                                    class="fas fa-plus"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="income-tab">
+                    <div class="transaction-container">
+                        <h3>Add New Income</h3>
+                        <form id="income-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="income-source">Source</label>
+                                    <select id="income-source" required>
+                                        <option value="" disabled selected>Select source</option>
+                                        <option value="Salary">Salary</option>
+                                        <option value="Freelance">Freelance</option>
+                                        <option value="Interest">Interest</option>
+                                        <option value="Gift">Gift</option>
+                                        <option value="Refund">Refund</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="income-amount">Amount</label>
+                                    <input type="number" id="income-amount" placeholder="Enter amount..." step="0.01"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="income-date">Date</label>
+                                    <input type="date" id="income-date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="income-note">Note (Optional)</label>
+                                    <input type="text" id="income-note" placeholder="Add a note...">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn income-btn">Add Income <i class="fas fa-plus"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-section">
+            <div class="chart-wrapper">
+                <h3>Expense Breakdown</h3>
+                <div class="pie-chart-container">
+                    <canvas id="expense-pie-chart"></canvas>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <h3>Weekly Overview</h3>
+                <div class="line-chart-container">
+                    <canvas id="expense-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="transaction-list-container">
+            <h3>Transaction History</h3>
+            <div class="category-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="expense">Expenses</button>
+                <button class="filter-btn" data-filter="income">Income</button>
+            </div>
+            <ul id="transaction-list" class="transaction-list">
+                <!-- Transactions will be added here dynamically -->
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Expense Tracker</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="../JS/dashboard.js"></script>
+</body>
+
+</html>
