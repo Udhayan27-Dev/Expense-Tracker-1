@@ -36,7 +36,7 @@ const firebaseConfig = {
   
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        window.location.href = "../HTML/dashboard.html";  // Change this to your target page
+        window.location.href = "dashboard.html";  // Change this to your target page
       })
       .catch((error) => alert(error.message));
   });
