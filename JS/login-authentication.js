@@ -36,7 +36,7 @@ const firebaseConfig = {
   
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        window.location.href = "dashboard.html";  // Change this to your target page
+        window.location.href = "html/dashboard.html";
       })
       .catch((error) => alert(error.message));
   });
@@ -51,7 +51,7 @@ const firebaseConfig = {
       .then(() => {
         alert("Signed up successfully!");
 
-        formContainer.classList.remove('active');  // Show login form
+        formContainer.classList.remove('active');
       })
       .catch((error) => alert(error.message));
   });
